@@ -4,12 +4,14 @@ import { useState } from 'react';
 import { createServerContext } from 'react';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 
 export default function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
+
 
   const userLoginData = async (e:any) => {
     try {
@@ -20,15 +22,17 @@ export default function Home() {
     if(response.status == 200){
        // Lógica para tratamento de sucesso
       console.log('Login bem-sucedido!', response.data);
+      router.push('/user');
     }
-    else{
+    else if(response.status == 401){
+      //alert('User is incorrect !! Verify your email or passwords!!');
       console.log(response.data)
     }
     
   } 
   catch (error) {
     // Lógica para tratamento de erro
-    console.log('Falha no login:', error);
+    console.log('Login Failure:', error);
   }
 }
   return (
@@ -45,6 +49,7 @@ export default function Home() {
         </label>
         <br />
         <button type="submit">Login</button>
+        
       </form>
     </div>
     </main>
