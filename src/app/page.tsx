@@ -5,7 +5,10 @@ import { createServerContext } from 'react';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-
+//@ts-ignore
+global.performance = global.performance || {
+  now: () => new Date().getTime(),
+};
 
 
 export default function Home() {
