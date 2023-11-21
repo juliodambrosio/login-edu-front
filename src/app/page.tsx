@@ -7,12 +7,13 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 
+
 export default function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
 
-
+ 
   const userLoginData = async (e:any) => {
     try {
     e.preventDefault();
@@ -20,8 +21,10 @@ export default function Home() {
     const response = await axios.post('http://127.0.0.1:8080/login', {email, password });
     
     if(response.status == 200){
-       // Lógica para tratamento de sucesso
-      console.log('Login bem-sucedido!', response.data);
+       
+      localStorage.setItem('Token', response.data.Token);
+      console.log(localStorage.getItem('Token'));
+      console.log('Success!', response.data);
       router.push('/user');
     }
     else if(response.status == 401){
@@ -35,6 +38,7 @@ export default function Home() {
     console.log('Login Failure:', error);
   }
 }
+
   return (
     <main>
     <div>
