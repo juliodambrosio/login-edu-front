@@ -76,15 +76,6 @@ export default function Users() {
                 <br />
                 <button type="submit">Add User</button>
             </form>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                </tr>
-
-               
-            </table>
         </main>
     )
 
